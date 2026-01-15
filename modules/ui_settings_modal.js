@@ -932,9 +932,28 @@ root.querySelector("#abgm_reset_vol_selected")?.addEventListener("click", async 
       bindList.appendChild(p);
       return;
     }
-    for (let i = 0; i < chars.length; i++) {
-      const ch = chars[i];
-      if (!ch) continue;
+    // 캐릭터 정렬: 특문 → 한글 → 일본어 → 한자/중국어 → 영어
+    const getCharCategory = (name) => {
+      const first = (name || "")[0] || "";
+      if (/^[가-힣]/.test(first)) return 1; // 한글
+      if (/^[\u3040-\u309F\u30A0-\u30FF]/.test(first)) return 2; // 일본어 (히라가나/가타카나)
+      if (/^[\u4E00-\u9FFF]/.test(first)) return 3; // 한자 (중국어 포함)
+      if (/^[a-zA-Z]/.test(first)) return 4; // 영어
+      return 0; // 특문/숫자/기타
+    };
+    
+    const sortedChars = chars
+      .map((ch, idx) => ({ ch, idx }))
+      .filter(item => item.ch)
+      .sort((a, b) => {
+        const nameA = String(a.ch.name ?? a.ch?.data?.name ?? "").trim().toLowerCase();
+        const nameB = String(b.ch.name ?? b.ch?.data?.name ?? "").trim().toLowerCase();
+        const catA = getCharCategory(nameA);
+        const catB = getCharCategory(nameB);
+        if (catA !== catB) return catA - catB;
+        return nameA.localeCompare(nameB, "ko");
+      });
+    for (const { ch, idx: i } of sortedChars) {
       const name =
         String(ch.name ?? ch?.data?.name ?? ch?.data?.first_mes ?? `Character #${i}`).trim() || `Character #${i}`;
       const boundId = String(ch?.data?.extensions?.[_EXT_BIND_KEY]?.presetId ?? "");
