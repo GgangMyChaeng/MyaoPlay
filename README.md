@@ -3,7 +3,7 @@
 <h2 id="description">설명</h2>
 <p>SillyTavern 전용 오디오(mp3 & url 호환) 확장</p>
 <h2>License</h2>
-<p>✔️ 비상업적 용도로만 사용해야 하며, 깡통 사이트 내에서만 공유 가능 (<a href="https://kkangtong.xyz/" target="_blank" rel="noopener noreferrer">https://kkangtong.xyz/</a>)<br>
+<p>✔️ 본 확장은 비상업적 용도에 한하여 깡싸(<a href="https://kkangtong.xyz/" target="_blank" rel="noopener noreferrer">https://kkangtong.xyz/</a>) 내에서만 재배포를 허용하며, 그 외 모든 외부 사이트·플랫폼으로의 재배포를 금지함<br>
 ✔️ 해당 확장 공유 시 출처 표기 필수&nbsp;<br>
 ✔️ 확장 자체의 코드 일부를 가져다가 쓰는 것, 일부 수정하여 배포하는 것은 일체 금지<br>
 ✔️ 해당 확장의 설정>소스>프리소스 섹션에 동봉된 오디오 소스들은 확장 제작자가 SUNO로 직접 제작한 것들이므로 비상업적 용도에 한하여 깡통 사이트 내에서 자유로운 사용·편집 및 공유를 허용함 (참고로 프리소스에서 마이/프리셋에 복사 누르면 알아서 라이센스 문구 따라감)<br>
