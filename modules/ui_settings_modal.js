@@ -593,6 +593,29 @@ export function initModal(overlay) {
   });
   // 저장된 탭 복원
   switchTab(savedTab);
+  // ===== Modal Power Button (Extension Toggle) =====
+  const modalPowerBtn = root.querySelector('#abgm_modal_enabled_btn');
+  const modalPowerImg = root.querySelector('#abgm_modal_enabled_img');
+  if (modalPowerBtn && modalPowerImg) {
+    const ICON_ON = "https://i.postimg.cc/6qDv8VHV/Myao_Play_On.png";
+    const ICON_OFF = "https://i.postimg.cc/tg5WBxTb/Myao_Play_Off.png";
+  
+    const updateModalPowerUI = () => {
+      const enabled = !!settings.enabled;
+      modalPowerImg.src = enabled ? ICON_ON : ICON_OFF;
+      modalPowerBtn.title = enabled ? 'Enabled: ON' : 'Enabled: OFF';
+    };
+    updateModalPowerUI();
+  
+    modalPowerBtn.addEventListener('click', () => {
+      settings.enabled = !settings.enabled;
+      _saveSettingsDebounced();
+      updateModalPowerUI();
+      if (typeof window.__abgmSyncEnabledUI === 'function') {
+        window.__abgmSyncEnabledUI();
+      }
+    });
+  }
   // ===== Theme Toggle =====
   const themeBtns = root.querySelectorAll('.abgm-theme-btn');
   const applyTheme = (theme) => {
