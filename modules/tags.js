@@ -7,50 +7,78 @@ const TAG_ALIASES = new Map([
   ["hip-hop", "hiphop"],
   ["hip hop", "hiphop"],
   ["r&b", "rnb"],
-  ["rnb", "rnb"],
-  ["lofi", "lo-fi"], // 취향
+  ["ballads", "ballad"],
+  ["vocals", "vocal"],
+  ["lyric", "vocal"],
+  ["lyrics", "vocal"],
 ]);
 
 // “문구(여러 단어)”를 통째로 확정 매핑
 const PHRASE_ALIASES = new Map([
   ["alternative r&b", ["mood:alternative", "genre:rnb"]],
   ["acoustic pop", ["inst:acoustic", "genre:pop"]],
+  ["trap beat", ["genre:trap"]],
+  ["trap beats", ["genre:trap"]],
   ["neo soul", ["genre:neo_soul"]],
   ["bossa nova", ["genre:bossa_nova"]],
-  ["lo-fi hip hop", ["mood:lofi", "genre:hiphop"]],
   ["glitch hop", ["genre:glitch_hop"]],
-  ["jazz hop", ["genre:jazz_hop"]],
   ["industrial techno", ["genre:industrial", "genre:techno"]],
   ["electronic/edm", ["genre:electronic", "genre:edm"]],
-  ["darksynth", ["genre:darksynth", "mood:dark", "inst:synth"]],
+  ["darksynth", ["genre:darksynth"]],
   ["french glitch", ["genre:french", "genre:glitch"]],
   ["808 bassline", ["inst:808_bass"]],
-  ["industrial horror", ["mood:industrial", "mood:horror"]],
+  ["industrial horror", ["genre:industrial", "mood:horror"]],
   ["mechanical groove", ["mood:mechanical", "mood:groove"]],
   ["night vibes", ["mood:night_vibes"]],
   ["tension", ["mood:tense"]],
   ["high-energy j-rock", ["mood:high-energy", "genre:j-rock"]],
+  // 장르 분리/정리
+  ["industrial metal", ["genre:industrial", "genre:metal"]],
+  ["dark orchestral hybrid", ["mood:dark", "inst:orchestra", "genre:hybrid"]],
+  ["cinematic dark ambient", ["mood:cinematic", "mood:dark", "genre:ambient"]],
+  ["industrial orchestral", ["genre:industrial", "inst:orchestra"]],
+  ["neoclassical darkwave", ["genre:neoclassical", "genre:darkwave"]],
+  ["orchestral dark fantasy", ["inst:orchestra", "mood:dark", "mood:fantasy"]],
+  ["dark fantasy ambient", ["mood:dark", "mood:fantasy", "genre:ambient"]],
+  ["dream pop", ["genre:dream_pop"]],
+  ["chillwave", ["genre:chillwave"]],
+  ["alternative pop", ["mood:alternative", "genre:pop"]],
+  ["bedroom pop", ["genre:bedroom_pop"]],
+  ["tropical house", ["genre:tropical_house"]],
+  ["gothic choir", ["mood:gothic", "inst:choir"]],
+  ["chamber strings", ["inst:chamber_strings"]],
+  ["electronic instrumentation", ["inst:electronic"]],
+  ["french drill", ["genre:french", "genre:drill"]],
+  ["power pop", ["genre:power_pop"]],
+  ["medieval folk", ["mood:medieval", "genre:folk"]],
+  ["celtic upbeat", ["mood:celtic", "mood:upbeat"]],
+  ["future rnb", ["genre:future_rnb"]],
+  ["lo-fi hip hop", ["genre:lofi_hiphop"]],
+  ["jazz hop", ["genre:jazz_hop"]],
 ]);
 
 const GENRE_WORDS = new Set([
   "blues","jazz","rock","pop","country","classical","folk","funk","soul","reggae","metal","ambient",
-  "electronic","edm","hiphop","rap","rnb","drill","idm","techno","glitch","j-rock"
+  "electronic","edm","hiphop","rap","rnb","drill","idm","techno","glitch","j-rock",
+  "trap","darksynth","darkwave","neoclassical","chillwave","dream_pop","bedroom_pop","tropical_house",
+  "ballad","dance","industrial","urban"
 ]);
 
 const MOOD_WORDS = new Set([
   "calm","dark","sad","happy","tense","chill","cozy","epic","mysterious",
-  "alternative","chaotic","cinematic","cold","cyberpunk","tension","night","tight","lofi",
+  "alternative","chaotic","cinematic","cold","cyberpunk","tension","night","tight","lo-fi",
   "east asian influence","exploration","high-energy","hopeless","horizon","military",
-  "underscore","mundane","soft"
+  "underscore","mundane","soft", "gothic","fantasy","medieval","celtic","upbeat"
 ]);
 
 const INST_WORDS = new Set([
   "piano","guitar","strings","synth","bass","drums","orchestra",
-  "acoustic","808","turntable","scratch","808_bass"
+  "acoustic","808","turntable","scratch","808_bass",
+  "choir","chamber_strings"
 ]);
 
 const LYRIC_WORDS = new Set([
-  "lyric","lyrics","no lyric","instrumental","vocal","male","female"
+  "lyric","no lyric","instrumental","vocal","male","female","duet"
 ]);
 
 // (내부) raw 태그를 소문자/공백정리 + 별칭 적용 + 숫자만 있으면 bpm:xxx로 변환
@@ -124,8 +152,8 @@ export function abgmNormTag(raw) {
 /** ========================= 태그 표시용 헬퍼 (표준 태그 → UI 라벨) ========================= */
 const TAG_PRETTY_MAP = new Map([
   ["rnb", "R&B"],
-  ["hiphop", "hip-hop"],
-  ["lofi", "lo-fi"],
+  ["hiphop", "Hip-Hop"],
+  ["lo-fi", "Lo-Fi"],
   ["idm", "IDM"],
   ["edm", "EDM"],
 ]);
@@ -157,6 +185,8 @@ export function tagPretty(t){
   let v = tagVal(s).replace(/[_]+/g, " ").trim(); // neo_soul -> neo soul
   if (TAG_PRETTY_MAP.has(v)) v = TAG_PRETTY_MAP.get(v);
   if (cat === "bpm") return `${v} BPM`;
+  // 첫 글자 대문자로 (각 단어마다)
+  v = v.replace(/\b[a-z]/g, c => c.toUpperCase());
   return v;
 }
 
