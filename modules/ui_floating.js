@@ -1,7 +1,7 @@
 import { ensureSettings } from "./settings.js";
 import { saveSettingsDebounced } from "./deps.js";
 
-console.log("[MyaPl] ui_floating loaded");
+// console.log("[MyaPl] ui_floating loaded");
 
 // index.js에 있던 다른 기능(모달/NP/디버그 토글) 콜백만 연결해줌
 let openModal = () => {};
@@ -245,7 +245,7 @@ function createFloatingMenu() {
       toggleDebugMode();
     } else if (action === "help") {
       // 4) Help 섹션 열기 (나중에 구현)
-      console.log("[MyaPl] Help clicked");
+      // console.log("[MyaPl] Help clicked");
     } else if (action === "settings") {
       openModal();
       closeFloatingMenu();
