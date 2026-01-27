@@ -434,7 +434,7 @@ export async function openFreeSourcesModal() {
   host.appendChild(overlay);
   window.addEventListener("keydown", abgmFsOnEsc);
   await initFreeSourcesModal(overlay);
-  console.log("[MyaPl] freesources modal opened");
+  // console.log("[MyaPl] freesources modal opened");
 }
 
 
@@ -1207,7 +1207,7 @@ export async function syncBundledFreeSourcesIntoSettings(settings, { force = fal
   if (save) {
     try { _saveSettingsDebounced?.(); } catch {}
   }
-  console.log("[MyaPl] freeSources synced:", settings.freeSources.length);
+  // console.log("[MyaPl] freeSources synced:", settings.freeSources.length);
 }
 
 // 제작자 툴
