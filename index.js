@@ -7,7 +7,7 @@
 
 /** =================================================================================== */
 import { abgmNormTags, abgmNormTag, tagVal, tagPretty, tagCat, sortTags } from "./modules/tags.js";
-import { extension_settings, saveSettingsDebounced, __abgmResolveDeps, getSTContextSafe, getBoundPresetIdFromContext, EXT_BIND_KEY } from "./modules/deps.js";
+import { extension_settings, saveSettingsDebounced, __abgmResolveDeps, getSTContextSafe, getBoundPresetIdFromContext, EXT_BIND_KEY, getRequestHeaders } from "./modules/deps.js";
 import { openDb, idbPut, idbGet, idbDel, ensureAssetList, importZip, abgmGetDurationSecFromBlob, idbPutImage, idbGetImage, idbDelImage, checkIdbIntegrity, listIdbKeys } from "./modules/storage.js";
 import { ensureSettings, migrateLegacyDataUrlsToIDB, ensureEngineFields, exportPresetFile, rekeyPreset, pickPresetFromImportData, getActivePromptContent } from "./modules/settings.js";
 import { abgmBindFloatingActions, createFloatingButton, removeFloatingButton, removeFloatingMenu, openFloatingMenu, closeFloatingMenu, updateFloatingButtonPosition, abgmGetFloatingMenuEl, updateMenuDebugIcon, toggleDebugToast, setDebugToastText } from "./modules/ui_floating.js";
@@ -18,6 +18,7 @@ import { abgmBindFreeSourcesDeps, closeFreeSourcesModal, bootFreeSourcesSync, sy
 import { abgmBindEngineDeps, getBgmAudio, getEngineCurrentFileKey, getEngineCurrentPresetId, stopRuntime, togglePlayPause, ensurePlayFile, engineTick, startEngine, setEngineCurrentFileKey, pickRandomKey } from "./modules/engine.js";
 import { uid, basenameNoExt, escapeHtml, isProbablyUrl, dropboxToRaw, clamp01, clone, parseKeywords, getChatKeyFromContext, getLastAssistantText, makeAsstSig } from "./modules/utils.js";
 import { getActivePreset, getEntryName, ensureBgmNames, getBgmSort, getPresetSort, getSortedBgms, getSortedKeys, findBgmByKey, abgmCycleBgmSort, abgmSortNice, isFileKeyReferenced } from "./modules/state.js";
+import { initMessageButtons } from "./modules/tts/tts_message_button.js";
 /** =================================================================================== */
 
 
@@ -515,11 +516,25 @@ async function init() {
   startEngine();
   // 완드 메뉴
   addWandMenuButton();
+  // TTS 메시지 버튼 초기화
+  initMessageButtons();
   // 2) 플로팅 버튼 초기화
   const settings = ensureSettings();
   // 테마 초기화 (저장된 테마 적용)
   if (settings.modalTheme === 'dark') {
     document.body.setAttribute('data-abgm-theme', 'dark');
+  }
+  // 폰트 초기화 (저장된 폰트 적용)
+  if (settings.font) {
+    document.documentElement.style.setProperty('--abgm-font', `'${settings.font}', sans-serif`);
+  }
+  // 폰트 크기 초기화
+  if (settings.fontSize) {
+    document.documentElement.style.setProperty('--abgm-font-size', `${settings.fontSize}%`);
+  }
+  // 폰트 굵기 초기화
+  if (settings.fontWeight) {
+    document.documentElement.style.setProperty('--abgm-font-weight', settings.fontWeight);
   }
   // 3) 디버그: 콘솔에서 설정 확인용
   window.__ABGM_DBG__ = {
@@ -698,6 +713,7 @@ function bindDepsOnce() {
     fitModalToHost,
     getModalHost,
     EXT_BIND_KEY,
+    getRequestHeaders,
     
     updateNowPlayingUI,
     engineTick: () => engineTick(),
