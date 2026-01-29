@@ -6,6 +6,8 @@
 
 
 
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Nanum+Gothic&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&family=Single+Day&family=Song+Myung&family=Yeon+Sung&display=swap');
+
 /* =================================================================
    THEME SYSTEM - CSS Variables (UNIFIED)
    ================================================================= */
@@ -13,6 +15,10 @@
 /* ===== Light Theme (Default) ===== */
 :root {
   color-scheme: light;
+  /* Font */
+  --abgm-font: 'Noto Sans KR', sans-serif;
+  --abgm-font-size: 100%;
+  --abgm-font-weight: 400;
   /* Surface & Background */
   --abgm-bg: #ffffff;
   --abgm-surface: #f8fafd;
@@ -85,7 +91,7 @@
 body[data-abgm-theme="dark"] {
   color-scheme: dark;
   /* Surface & Background - Teal/Mint */
-  --abgm-bg: #101a1b;
+  --abgm-bg: #262929;
   --abgm-surface: rgba(255, 255, 255, 0.04);
   --abgm-surface2: rgba(255, 255, 255, 0.06);
   --abgm-surface-hover: rgba(255, 255, 255, 0.08);
@@ -124,16 +130,16 @@ body[data-abgm-theme="dark"] {
   --abgm-shadow-strong: rgba(0, 0, 0, 0.4);
   
   /* Glass effect */
-  --abgm-glass-bg: rgba(30, 40, 43, 0.95);
+  --abgm-glass-bg: rgba(36, 41, 43, 0.95);
   --abgm-glass-border: rgba(255, 255, 255, 0.12);
   
   /* Overlay */
   --abgm-overlay: rgba(0, 0, 0, 0.85);
   
-  /* Modal specific - Teal/Mint */
+  /* Modal specific */
   --abgm-modal-bg: rgba(20, 20, 20, 0.96);
-  --abgm-modal-header-bg: rgba(30, 30, 30, 0.98);
-  --abgm-tabbar-bg: rgba(20, 20, 20, 0.96);
+  --abgm-modal-header-bg: rgba(45, 45, 48, 0.98);
+  --abgm-tabbar-bg: rgba(35, 35, 38, 0.98);
   --abgm-tab-active-color: #6be1ff;
   
   /* Table */
@@ -148,7 +154,7 @@ body[data-abgm-theme="dark"] {
   --abgm-floating-btn-hover: rgba(255, 255, 255, 0.10);
   
   /* Debug toast - Teal/Mint */
-  --abgm-toast-bg: rgba(34, 42, 46, 0.95);
+  --abgm-toast-bg: rgba(54, 61, 65, 0.95);
   --abgm-toast-border: rgba(255, 255, 255, 0.12);
   --abgm-toast-text: rgba(255, 255, 255, 0.88);
 }
@@ -330,7 +336,7 @@ body[data-abgm-theme="dark"] {
 
 .abgm-menu-btn:hover {
   background: var(--abgm-floating-btn-hover);
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.17);
   transform: scale(1.05);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
@@ -426,6 +432,9 @@ body.autobgm-modal-open {
 }
 
 .autobgm-modal {
+  font-family: var(--abgm-font);
+  font-size: var(--abgm-font-size);
+  font-weight: var(--abgm-font-weight);
   width: min(900px, 96vw);
   max-height: calc(100vh - 24px);
   min-height: 240px;
@@ -461,6 +470,7 @@ body.autobgm-modal-open {
 .autobgm-modal input,
 .autobgm-modal select,
 .autobgm-modal .text_pole {
+  font-family: var(--abgm-font);
   min-width: 0;
   max-width: 100%;
   background: var(--abgm-input-bg);
@@ -595,6 +605,7 @@ body.autobgm-modal-open {
 }
 
 .abgm-select {
+  font-family: var(--abgm-font);
   width: 100%;
   padding: 6px 10px;
   border-radius: 10px;
@@ -769,6 +780,7 @@ body.autobgm-modal-open {
 }
 
 .abgm-confirm {
+  font-family: var(--abgm-font);
   position: relative;
   width: min(420px, calc(100vw - 24px));
   border: 1px solid var(--abgm-border-strong);
@@ -1447,7 +1459,7 @@ body.autobgm-modal-open {
   gap: 6px;
   padding: 10px 15px;
   border-bottom: 1px solid var(--abgm-border);
-  background: var(--abgm-surface);
+  background: transparent;
 }
 
 .abgm-mode-subtab {
@@ -2022,6 +2034,7 @@ body.autobgm-modal-open {
 }
 
 .abgm-np-glass {
+  font-family: var(--abgm-font);
   background: var(--abgm-glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -2296,6 +2309,7 @@ body.autobgm-modal-open {
 }
 
 .abgm-pl-select {
+  font-family: var(--abgm-font);
   width: 100%;
   padding: 8px 12px;
   border-radius: 10px;
@@ -2424,6 +2438,7 @@ body.autobgm-modal-open {
 }
 
 .abgm-pl-sortmenu {
+  font-family: var(--abgm-font);
   position: relative;
   width: min(220px, calc(100% - 24px));
   padding: 8px;
@@ -2485,6 +2500,7 @@ body.autobgm-modal-open {
   border-radius: 8px;
   box-shadow: 0 4px 12px var(--abgm-shadow);
   
+  font-family: var(--abgm-font);
   font-size: 12px;
   line-height: 1.4;
   color: var(--abgm-toast-text);
@@ -2538,6 +2554,7 @@ body.autobgm-modal-open {
   border: none;
   background: transparent;
   color: var(--abgm-text-dim);
+  font-family: var(--abgm-font);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -3026,16 +3043,33 @@ textarea.abgm-lyrics-input:focus {
    Isolates the extension UI to ignore all interference from the SillyTavern theme.
    ================================================================= */
 
-/* --- 1. Global Isolation Container --- */
-/* #abgm_modal_overlay,
+/* --- 1. Force Font Family & Size & Weight --- */
+#abgm_modal_overlay,
+#abgm_modal_overlay *,
+#ABGM_NP_GLASS_OVERLAY,
+#ABGM_NP_GLASS_OVERLAY *,
+.abgm-floating-menu,
+.abgm-floating-menu *,
+.abgm-confirm-wrap,
+.abgm-confirm-wrap *,
+#abgm_addto_overlay,
+#abgm_addto_overlay *,
+#abgm_bind_overlay,
+#abgm_bind_overlay * {
+  font-family: var(--abgm-font) !important;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+#abgm_modal_overlay,
 #ABGM_NP_GLASS_OVERLAY,
 .abgm-floating-menu,
 .abgm-confirm-wrap,
-#abgm_addto_overlay {
-*/  /* Break font-family inheritance from ST theme and use system default */
-/*  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
-* }
-*/ 
+#abgm_addto_overlay,
+#abgm_bind_overlay {
+  font-size: var(--abgm-font-size) !important;
+  font-weight: var(--abgm-font-weight) !important;
+}
 
 /* --- 2. Force All Text Colors --- */
 #abgm_modal_overlay, #abgm_modal_overlay *,
@@ -3063,6 +3097,9 @@ textarea.abgm-lyrics-input:focus {
 #abgm_modal_overlay input[type="search"],
 #abgm_modal_overlay textarea,
 #abgm_modal_overlay select {
+  font-family: var(--abgm-font) !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
   background-color: var(--abgm-input-bg) !important;
   border: 1px solid var(--abgm-input-border) !important;
   color: var(--abgm-text) !important;
@@ -3070,6 +3107,7 @@ textarea.abgm-lyrics-input:focus {
   padding: 8px 10px !important;
   box-shadow: none !important;
 }
+
 #abgm_modal_overlay input:focus,
 #abgm_modal_overlay textarea:focus,
 #abgm_modal_overlay select:focus {
@@ -3077,12 +3115,25 @@ textarea.abgm-lyrics-input:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px var(--abgm-accent-soft) !important;
 }
+
 /* Force <option> colors inside dropdowns to follow theme */
 #abgm_modal_overlay select option,
 #ABGM_NP_GLASS_OVERLAY select option,
 .abgm-floating-menu select option {
+  font-family: var(--abgm-font) !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
   background: var(--abgm-input-bg) !important;
   color: var(--abgm-text) !important;
+}
+
+/* NP Glass input/select 폰트 */
+#ABGM_NP_GLASS_OVERLAY input,
+#ABGM_NP_GLASS_OVERLAY textarea,
+#ABGM_NP_GLASS_OVERLAY select {
+  font-family: var(--abgm-font) !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
 }
 
 /* --- 4. Force All Button Styles --- */
@@ -3798,4 +3849,127 @@ body[data-abgm-theme="dark"] #abgm_bind_overlay > div {
 
 .myaoplay-source-modal-btn.secondary:hover {
     background: var(--abgm-surface-hover, rgba(255, 255, 255, 0.08));
+}
+
+
+/* =================================================================
+   TTS Settings Section
+   ================================================================= */
+
+/* Provider 설정 박스 */
+.abgm-tts-provider-box {
+  margin-top: 15px;
+  padding: 12px;
+  background: var(--abgm-surface);
+  border: 1px solid var(--abgm-border);
+  border-radius: 8px;
+}
+
+/* 섹션 구분선 */
+.abgm-tts-divider {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--abgm-border);
+}
+
+/* CORS 경고 박스 */
+.abgm-tts-warning {
+  margin-top: 15px;
+  padding: 10px;
+  background: var(--abgm-danger-soft);
+  border: 1px solid var(--abgm-danger);
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--abgm-danger);
+}
+
+/* TTS 라벨 스타일 통일 */
+.abgm-tts-label {
+  font-size: 12px;
+  color: var(--abgm-text-dim);
+}
+
+/* TTS 섹션 code 태그 */
+#abgm-mode-tts code,
+.abgm-tts-warning code {
+  background: rgba(255, 81, 96, 0.479) !important;
+  color: var(--abgm-accent);
+  padding: 2px 6px;
+  border: 1px solid #fc8383;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* 토글 스위치 */
+.abgm-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.abgm-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.abgm-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,.2);
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.abgm-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+.abgm-switch input:checked + .abgm-slider {
+  background-color: #4CAF50;
+}
+
+.abgm-switch input:checked + .abgm-slider:before {
+  transform: translateX(20px);
+}
+
+/* 메시지 TTS 버튼 */
+.myaoplay-msg-tts-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+  border-radius: 4px;
+}
+
+.myaoplay-msg-tts-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.myaoplay-msg-tts-btn.is-playing {
+  opacity: 1;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
 }
