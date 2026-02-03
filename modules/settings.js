@@ -287,23 +287,6 @@ Example B (without keyword):
       overlay: true,        // true: BGM 위에 겹쳐 재생, false: BGM 일시정지 후 재생
       skipInOtherModes: true, // 키워드 모드 아닐 때 SFX 타입 곡 건너뛰기
     },
-    // TTS Mode 기본 설정
-    ttsMode: {
-      enabled: false,
-      autoPlay: true,
-      provider: "qwen", // 'qwen', 'elevenlabs' 등
-      providers: {
-        qwen: {
-          apiKey: "",
-          model: "qwen3-tts-flash",
-          voice: "Cherry",
-        },
-        elevenlabs: {
-          apiKey: "",
-          voiceId: "21m00Tcm4TlvDq8ikWAM", // 예시: Rachel
-        }
-      }
-    },
   };
   const s = extension_settings[SETTINGS_KEY];
   s.globalVolLocked ??= false;
@@ -520,18 +503,6 @@ Example B (without keyword):
   s.sfxMode ??= {};
   s.sfxMode.overlay ??= true;
   s.sfxMode.skipInOtherModes ??= true;
-  // TTS Mode 보정
-  s.ttsMode ??= {};
-  s.ttsMode.enabled ??= false;
-  s.ttsMode.autoPlay ??= true;
-  s.ttsMode.provider ??= "qwen";
-  s.ttsMode.providers ??= {};
-  s.ttsMode.providers.qwen ??= { model: "qwen3-tts-flash", apiKey: "", voice: "Cherry" };
-  // 구버전 마이그레이션: 최상위 qwen 설정을 providers.qwen으로 이동
-  if (s.ttsMode.qwen) {
-    s.ttsMode.providers.qwen = { ...s.ttsMode.providers.qwen, ...s.ttsMode.qwen };
-    delete s.ttsMode.qwen;
-  }
   // > 프리셋/곡 스키마 보정 + 구버전 변환
   Object.values(s.presets).forEach((p) => {
     p.defaultBgmKey ??= "";
